@@ -1,0 +1,5 @@
+language: ruby
+rvm:
+  - 2.5.1
+script: ./test.sh 
+after_script: bundle exec codeclimate-test-reporter
