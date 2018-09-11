@@ -4,10 +4,16 @@ describe 'Money' do
     expect(Money.new(10, dollars).inspect).to eq("USD 10.00")
     expect(Money.new(10, dollars).to_s).to eq("USD 10.00")
   end
+
   it 'is equal another with same amount and currency' do
     expect(Money.new(10, dollars)).to eq(Money.new(10, dollars))
   end
+
   it 'is instantiated by numeric as currency' do
     expect(1.as(dollars)).to eq(Money.new(1, dollars))
+  end
+
+  it 'can be added to another' do
+    expect(1.as(dollars) + 2.as(dollars)).to eq(3.as(dollars))
   end
 end
