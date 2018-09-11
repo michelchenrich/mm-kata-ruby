@@ -10,8 +10,9 @@ class Inventory
 
   def total_value(as_of_date)
     @purchase_orders.flat_map(&:items)
-                    .map(&:bundle)
+                    .select { |item| item.expected_until? as_of_date }
                     .map(&:total_price)
-                    .reduce(0.as(currency), &:+)
+                    .reduce(&:+)
+                    .as(currency)
   end
 end
