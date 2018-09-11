@@ -23,4 +23,16 @@ class Money
   def == other
     amount == other.amount && currency == other.currency
   end
+
+  def * multiplier
+    (amount * multiplier).as(currency)
+  end
+
+  def + augend
+    (amount + augend.as(currency).amount).as(currency)
+  end
+
+  def as_currency(currency)
+    self
+  end
 end

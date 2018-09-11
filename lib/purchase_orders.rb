@@ -1,0 +1,2 @@
+class PurchaseOrders < Array
+end

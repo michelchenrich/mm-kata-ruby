@@ -4,7 +4,7 @@ class Currency
   end
 
   def new_from(monetary_amount)
-    Money.new(monetary_amount, self)
+    monetary_amount.as_currency(self)
   end
 
   def code
