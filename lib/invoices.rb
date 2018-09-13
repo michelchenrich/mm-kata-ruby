@@ -1,0 +1,2 @@
+class Invoices < Array
+end
