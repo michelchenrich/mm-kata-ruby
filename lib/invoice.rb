@@ -1,6 +1,6 @@
 class Invoice
   def initialize
-    @items = []
+    @items = InvoiceItems.new
   end
 
   def with_item(item)
@@ -9,8 +9,6 @@ class Invoice
   end
 
   def total_price(as_of_date)
-    @items.select { |item| item.arrived_by? as_of_date }
-          .map(&:total_price)
-          .reduce(&:+)
+    @items.total_price(as_of_date)
   end
 end

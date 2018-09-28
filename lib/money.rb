@@ -31,4 +31,8 @@ class Money
   def as_currency(currency)
     self
   end
+
+  def coerce(number)
+    [self, number]
+  end
 end
