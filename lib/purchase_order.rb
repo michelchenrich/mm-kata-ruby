@@ -1,6 +1,6 @@
 class PurchaseOrder
   def initialize
-    @items = []
+    @items = PurchaseOrderItems.new 
   end
 
   def with_item(quantity, product, expected_arrival_date)
@@ -23,9 +23,6 @@ class PurchaseOrder
   end
 
   def unconfirmed_value(as_of_date)
-    @items.select { |item| not item.checked_in? }
-          .select { |item| item.expected_until? as_of_date }
-          .map(&:total_price)
-          .reduce(&:+)
+    @items.unconfirmed_value(as_of_date)
   end
 end
