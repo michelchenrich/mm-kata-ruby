@@ -1,21 +1,13 @@
 class Inventory
   def initialize(invoices, purchase_orders, currency)
-    @invoices = invoices
-    @purchase_orders = purchase_orders
+    @inventories = [invoices.clone.extend(ValuatableInvoices),
+                    purchase_orders.clone.extend(ValuatablePurchaseOrders)]
     @currency = currency
   end
 
   def total_value(as_of_date)
-    confirmed_value(as_of_date) + unconfirmed_value(as_of_date)
-  end
-
-  def confirmed_value(as_of_date)
-    @invoices.total_price(as_of_date)
-             .as(@currency)
-  end
-
-  def unconfirmed_value(as_of_date)
-    @purchase_orders.unconfirmed_value(as_of_date)
-                    .as(@currency)
+    @inventories.map { |inventory| inventory.value(as_of_date) }
+                .map { |value| value.as(@currency) }
+                .sum
   end
 end
