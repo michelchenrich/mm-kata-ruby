@@ -5,10 +5,6 @@ class ProductBundle < Decorator
   end
 
   def total_price
-    unitary_price * quantity
-  end
-
-  def quantity
-    @quantity
+    unitary_price * @quantity
   end
 end
